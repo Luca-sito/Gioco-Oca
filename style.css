@@ -1,0 +1,314 @@
+:root {
+  --wood-dark: #241812;
+  --wood: #3a2618;
+  --wood-light: #55381f;
+  --brass: #c9a227;
+  --brass-bright: #e8c968;
+  --felt: #2f4d3a;
+  --parchment: #f1e6cd;
+  --parchment-dark: #e2d3ac;
+  --ink: #2a1f14;
+  --danger: #a83232;
+  --display-font: 'Fraunces', serif;
+  --body-font: 'Karla', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(201,162,39,0.10), transparent 45%),
+    var(--wood-dark);
+  color: var(--parchment);
+  font-family: var(--body-font);
+}
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 22px 32px 14px;
+  border-bottom: 1px solid var(--wood-light);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { font-size: 1.6rem; }
+.brand-text {
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--brass-bright);
+}
+.topbar-sub {
+  font-size: 0.85rem;
+  color: var(--parchment-dark);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.screen { padding: 28px 32px 60px; max-width: 1100px; margin: 0 auto; }
+.hidden { display: none !important; }
+
+/* --- Schermata stanze --- */
+.rooms-intro h1 {
+  font-family: var(--display-font);
+  font-weight: 800;
+  font-size: 2.4rem;
+  margin: 0 0 6px;
+  color: var(--parchment);
+}
+.rooms-intro p { color: var(--parchment-dark); margin: 0 0 24px; }
+
+.name-field { margin-bottom: 24px; max-width: 340px; }
+.name-field label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brass);
+  margin-bottom: 6px;
+}
+.name-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--wood-light);
+  background: var(--wood);
+  color: var(--parchment);
+  font-family: var(--body-font);
+  font-size: 1rem;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.room-card {
+  position: relative;
+  border-radius: 10px;
+  padding: 22px 20px;
+  background: linear-gradient(160deg, var(--wood), var(--wood-dark));
+  border: 1px solid var(--wood-light);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.room-card:hover { transform: translateY(-3px); border-color: var(--brass); }
+.room-card.full { opacity: 0.55; cursor: not-allowed; }
+.room-card.full:hover { transform: none; border-color: var(--wood-light); }
+.room-card.premium { border-color: var(--brass); }
+.room-card h3 {
+  font-family: var(--display-font);
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0 0 8px;
+  color: var(--brass-bright);
+}
+.room-card .tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--brass);
+  color: var(--ink);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.room-card .occupancy {
+  font-size: 0.9rem;
+  color: var(--parchment-dark);
+}
+.room-card .status-line {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--felt);
+  background: var(--parchment);
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.unlock-box {
+  margin-top: 22px;
+  max-width: 340px;
+  background: var(--wood);
+  border: 1px solid var(--brass);
+  border-radius: 8px;
+  padding: 16px;
+}
+.unlock-box label { display: block; font-size: 0.8rem; margin-bottom: 6px; color: var(--brass); }
+.unlock-box input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--wood-light);
+  background: var(--wood-dark);
+  color: var(--parchment);
+  margin-bottom: 10px;
+}
+
+.room-error { color: #ff9a9a; margin-top: 16px; min-height: 1.2em; }
+
+button {
+  font-family: var(--body-font);
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  background: var(--brass);
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+button:hover { background: var(--brass-bright); }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+button.ghost {
+  background: transparent;
+  color: var(--parchment-dark);
+  border: 1px solid var(--wood-light);
+}
+button.ghost:hover { color: var(--parchment); border-color: var(--brass); background: transparent; }
+
+/* --- Schermata di gioco --- */
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+@media (max-width: 880px) {
+  .game-layout { grid-template-columns: 1fr; }
+}
+
+.room-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.room-header h2 { font-family: var(--display-font); margin: 0; color: var(--brass-bright); }
+.pill {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--wood-light);
+  color: var(--parchment);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.pill.playing { background: var(--felt); }
+.pill.finished { background: var(--brass); color: var(--ink); }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+  background: var(--parchment-dark);
+  padding: 10px;
+  border-radius: 10px;
+  border: 4px solid var(--brass);
+}
+
+.square {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--parchment);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--ink);
+  font-weight: 700;
+  overflow: hidden;
+}
+.square .num { position: absolute; top: 2px; left: 4px; font-size: 0.6rem; opacity: 0.6; }
+.square.oca { background: #d8e8cf; }
+.square.ponte { background: #cfe0e8; }
+.square.locanda { background: #e8ddb0; }
+.square.pozzo { background: #b9c9d6; }
+.square.labirinto { background: #ddc7e8; }
+.square.prigione { background: #c9c9c9; }
+.square.morte { background: #d9a3a3; }
+.square.start { background: var(--felt); color: var(--parchment); }
+.square.finish { background: var(--brass); color: var(--ink); }
+.square .icon { font-size: 1.1rem; }
+
+.token-row {
+  display: flex;
+  gap: 2px;
+  position: absolute;
+  bottom: 2px;
+}
+.token {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+#turn-indicator { font-size: 0.9rem; color: var(--parchment-dark); }
+
+.players-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.players-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--wood);
+}
+.players-list li.active-turn { border: 1px solid var(--brass); }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+.chat-panel {
+  background: var(--wood);
+  border: 1px solid var(--wood-light);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 560px;
+}
+.chat-panel h3 {
+  font-family: var(--display-font);
+  margin: 0 0 10px;
+  color: var(--brass-bright);
+  font-size: 1.1rem;
+}
+.chat-log {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 4px;
+  margin-bottom: 10px;
+}
+.chat-line { font-size: 0.85rem; line-height: 1.35; }
+.chat-line .who { color: var(--brass); font-weight: 700; }
+.chat-line.system { color: var(--parchment-dark); font-style: italic; }
+.chat-form { display: flex; gap: 6px; }
+.chat-form input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--wood-light);
+  background: var(--wood-dark);
+  color: var(--parchment);
+}
